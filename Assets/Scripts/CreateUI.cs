@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CreateUI : MonoBehaviour
 {
-    public Level level;
+    private Level level;
 
     public Vector2 gridSize;
     public Vector2 startPosition;
@@ -18,6 +18,9 @@ public class CreateUI : MonoBehaviour
 
     public void CreateLevel()
     {
+        int l = PlayerPrefs.GetInt("currentLvl",1);
+        level = Resources.Load<Level>("Levels/Level"+l);
+
         for (int c = 0; c < level.nodes.Count; c++)
         {
             int i = Mathf.RoundToInt(level.nodes[c].startPosition.y);
