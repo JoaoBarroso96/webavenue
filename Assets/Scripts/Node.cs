@@ -8,6 +8,18 @@ public class Node : MonoBehaviour
     private Vector2 gridPosition;
     private Vector2 correctPosition;
     private GameObject goGrid;
+    private GameLogic gameLogic;
+    private bool canMove;
+
+    public void SetCanMove(bool move)
+    {
+        this.canMove = move;
+    }
+
+    public void SetGameLogic(GameLogic gl)
+    {
+        this.gameLogic = gl;
+    }
 
     public void SetGoGrid(GameObject goGrid)
     {
@@ -24,6 +36,16 @@ public class Node : MonoBehaviour
         gridPosition = new Vector2(x, y);
     }
 
+    public void SetCorrectPosition(int x, int y)
+    {
+        correctPosition = new Vector2(x, y);
+    }
+
+    public bool NodeCanMove()
+    {
+        return this.canMove;
+    }
+
     public Vector2 GetPosition()
     {
         return gridPosition;
@@ -31,13 +53,13 @@ public class Node : MonoBehaviour
     
     public void MoveToInit()
     {
-        print(gridPosition);
         Vector3 newPosition = new Vector3(createUI.startPosition.x + createUI.nodeSize * gridPosition.x, createUI.startPosition.y - createUI.nodeSize * gridPosition.y, 0);
         StartCoroutine(MoveFromTo(transform, transform.localPosition, newPosition, 700f));
     }
 
     public bool IsPositionedCorrect()
     {
+        print(gridPosition + " _ " + correctPosition);
         return gridPosition == correctPosition;
     }
 
@@ -53,5 +75,7 @@ public class Node : MonoBehaviour
         }
         objectToMove.localPosition = b;
         transform.SetParent(goGrid.transform);
+
+        gameLogic.CheckUserWin();
     }
 }

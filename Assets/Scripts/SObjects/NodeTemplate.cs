@@ -10,4 +10,5 @@ public class NodeTemplate : ScriptableObject
     public Sprite image;
     public enum typeNode { Wire, Lamp , Power };
     public typeNode sampleVariable;
+    public bool canMove = true;
 }

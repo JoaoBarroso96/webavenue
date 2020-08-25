@@ -27,6 +27,9 @@ public class CreateUI : MonoBehaviour
             newNode.transform.localPosition = new Vector3(startPosition.x + nodeSize * j, startPosition.y - nodeSize * i, 0);
 
             Node n = newNode.GetComponent<Node>();
+            n.SetCorrectPosition(Mathf.RoundToInt(level.nodes[c].correctPosition.x),Mathf.RoundToInt(level.nodes[c].correctPosition.y));
+            n.SetCanMove(level.nodes[c].canMove);
+            n.SetGameLogic(gameLogic);
             n.SetGoGrid(goGrid);
             n.SetCreateUI(this);
             n.SetPosition(j, i);
