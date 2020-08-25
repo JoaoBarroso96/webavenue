@@ -64,14 +64,16 @@
   <ItemGroup>
     <Compile Include="Assets\Fonts\Script\scriptTexttest.cs" />
     <Compile Include="Assets\NeonShapes\SelfDestroyScript.cs" />
-    <Compile Include="Assets\Scripts\CreateUI.cs" />
-    <Compile Include="Assets\Scripts\GameLogic.cs" />
+    <Compile Include="Assets\Scripts\Game\CreateUI.cs" />
+    <Compile Include="Assets\Scripts\Game\GameLogic.cs" />
+    <Compile Include="Assets\Scripts\Game\Menu.cs" />
+    <Compile Include="Assets\Scripts\Game\Node.cs" />
     <Compile Include="Assets\Scripts\Global.cs" />
     <Compile Include="Assets\Scripts\Levels\LevelUI.cs" />
     <Compile Include="Assets\Scripts\Main\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\SObjects\Level.cs" />
     <Compile Include="Assets\Scripts\SObjects\NodeTemplate.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/joao_/Desktop/Projetos/Infinity/WebAvenue/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

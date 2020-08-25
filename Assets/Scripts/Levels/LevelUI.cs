@@ -12,12 +12,15 @@ public class LevelUI : MonoBehaviour
     public Vector2 startPosition;
     public Vector2 padding;
     public Color starWin;
+    public SoundManager soundManager;
 
     private int maxLine = 4;
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         int userLvl = PlayerPrefs.GetInt("userLevel", 1);
         userLvl = 3;
         for (int i = 0; i < Global.MAX_LEVEL; i++)
@@ -57,12 +60,13 @@ public class LevelUI : MonoBehaviour
 
     public void OnClickMain()
     {
+        soundManager.PlayClip("tap");
         SceneManager.LoadScene("Main", LoadSceneMode.Single);
     }
 
     public void OpenLvl(int id)
     {
-        print("aaa");
+        soundManager.PlayClip("tap");
         PlayerPrefs.SetInt("currentLvl", id);
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
