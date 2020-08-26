@@ -9,11 +9,14 @@ public class GameLogic : MonoBehaviour
     public GameObject goGrid;
     public GameObject goGameArea;
     public CreateUI createUI;
+    public Menu menu;
 
     //Data Variables
     public Dictionary<string, Node> dicNodesLvl;
+    public List<int> thresholdStar; // 3 stars ; 2 stars; 1 star
+    private float timerLevel;
 
-    private float counterHold;
+    private float counterHold; //Time hold to change node
     private GameObject nodeSelected;
     private bool canMoveNode;
     Vector2 mousePos;
@@ -21,14 +24,20 @@ public class GameLogic : MonoBehaviour
     private bool isFinished; // Time ended or user finish
 
     private int nodesMoved;
+    private int currentLvl;
+
+    private Level level;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentLvl = PlayerPrefs.GetInt("currentLvl", 1);
         isFinished = false;
         nodesMoved = 0;
+        timerLevel = 0f;
         dicNodesLvl = new Dictionary<string, Node>();
-        createUI.CreateLevel();
+        level = Resources.Load<Level>("Levels/Level" + currentLvl);
+        createUI.CreateLevel(level);
     }
 
     // Update is called once per frame
@@ -36,6 +45,8 @@ public class GameLogic : MonoBehaviour
     {
         if (!isFinished)
         {
+            timerLevel += Time.deltaTime;
+
             //PC
             if (isPC)
             {
@@ -204,6 +215,40 @@ public class GameLogic : MonoBehaviour
             {
                 isFinished = true;
                 print("win");
+
+                //Calculate Pontuation
+                
+                int lvlStar = 0;
+                if (timerLevel < level.time)
+                {
+                    float p = 100 * timerLevel / level.time;
+                    if (p <= thresholdStar[0])
+                    {
+                        lvlStar = 3;
+                    }
+                    else if (p <= thresholdStar[1])
+                    {
+                        lvlStar = 2;
+                    }
+                    else
+                    {
+                        lvlStar = 1;
+                    }
+                }
+                 
+                
+                if (PlayerPrefs.GetInt("lvl_" + currentLvl, 0) < lvlStar)
+                {
+                    PlayerPrefs.SetInt("lvl_" + currentLvl, lvlStar);
+                }
+
+                menu.ShowWinMenu(lvlStar);
+
+                //Update PlayerLevel
+                if (currentLvl > PlayerPrefs.GetInt("userLevel", 0))
+                {
+                    PlayerPrefs.SetInt("userLevel", currentLvl);
+                }
             }
         }
     }

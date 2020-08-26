@@ -16,10 +16,10 @@ public class CreateUI : MonoBehaviour
     public GameLogic gameLogic;
 
 
-    public void CreateLevel()
+    public void CreateLevel(Level lvl)
     {
-        int l = PlayerPrefs.GetInt("currentLvl",1);
-        level = Resources.Load<Level>("Levels/Level"+l);
+        //int l = PlayerPrefs.GetInt("currentLvl",1);
+        level = lvl;
 
         for (int c = 0; c < level.nodes.Count; c++)
         {

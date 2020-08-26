@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {x: 3, y: 4}
   correctPosition: {x: 3, y: 5}
-  image: {fileID: 21300000, guid: b55f8b9b877d819469899cc7a5ccb237, type: 3}
+  image: {fileID: 21300000, guid: aeff02d09e8b03045a40a1048bfe6f80, type: 3}
   sampleVariable: 0
+  canMove: 1

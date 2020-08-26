@@ -22,7 +22,7 @@ public class LevelUI : MonoBehaviour
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         int userLvl = PlayerPrefs.GetInt("userLevel", 1);
-        userLvl = 3;
+
         for (int i = 0; i < Global.MAX_LEVEL; i++)
         {
             int lvl = i + 1;
