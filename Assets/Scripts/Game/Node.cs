@@ -59,7 +59,6 @@ public class Node : MonoBehaviour
 
     public bool IsPositionedCorrect()
     {
-        print(gridPosition + " _ " + correctPosition);
         return gridPosition == correctPosition;
     }
 

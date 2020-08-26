@@ -20,13 +20,14 @@ public class CreateUI : MonoBehaviour
     {
         //int l = PlayerPrefs.GetInt("currentLvl",1);
         level = lvl;
-
+        goGrid.transform.localScale = new Vector3(lvl.scaleGrid, lvl.scaleGrid);
         for (int c = 0; c < level.nodes.Count; c++)
         {
             int i = Mathf.RoundToInt(level.nodes[c].startPosition.y);
             int j = Mathf.RoundToInt(level.nodes[c].startPosition.x);
 
             GameObject newNode = Instantiate(goNode, goGrid.transform);
+            newNode.transform.GetChild(0).gameObject.SetActive(level.nodes[c].canMove);
             newNode.transform.localPosition = new Vector3(startPosition.x + nodeSize * j, startPosition.y - nodeSize * i, 0);
 
             Node n = newNode.GetComponent<Node>();

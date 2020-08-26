@@ -16,4 +16,4 @@ MonoBehaviour:
   correctPosition: {x: 2, y: 5}
   image: {fileID: 21300000, guid: ad0519bb7ca06034a857327f024fd930, type: 3}
   sampleVariable: 2
-  canMove: 1
+  canMove: 0

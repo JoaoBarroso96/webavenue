@@ -23,8 +23,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -549,7 +551,7 @@ ScriptsOnlyBuild:
     className: SelfDestroyScript
   - hash:
       serializedVersion: 2
-      Hash: a838b86eca59d7f2b98d1c0e678d7cfc
+      Hash: 21c0bac1215fd43ef2ad268aadb44e03
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Menu
@@ -615,7 +617,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 950a3759613224e566102ee95e409512
+      Hash: 9c45aeffb156309df2fa011b75c1e629
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameLogic
@@ -729,7 +731,7 @@ ScriptsOnlyBuild:
     className: Toggle
   - hash:
       serializedVersion: 2
-      Hash: 49b7deb546d3b16e1e9cc58a99d592cb
+      Hash: e02b44d1cc9bf7bca715b6288ffe6407
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Level

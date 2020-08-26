@@ -27,10 +27,12 @@ public class GameLogic : MonoBehaviour
     private int currentLvl;
 
     private Level level;
+    private SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         currentLvl = PlayerPrefs.GetInt("currentLvl", 1);
         isFinished = false;
         nodesMoved = 0;
@@ -74,18 +76,16 @@ public class GameLogic : MonoBehaviour
                 {
                     counterHold += Time.deltaTime;
 
-                    if (counterHold > timeHold && nodeSelected != null)
+                    if (counterHold > timeHold && nodeSelected != null && !canMoveNode)
                     {
                         canMoveNode = true;
+                        soundManager.PlayClip("nodeSelect");
                     }
 
                     if (canMoveNode)
                     {
                         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         nodeSelected.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1f);
-
-
-
                     }
                 }
 
@@ -104,26 +104,38 @@ public class GameLogic : MonoBehaviour
                             string house = gridX + "_" + gridY;
                             if (dicNodesLvl.ContainsKey(house)) //Check has node in position
                             {
-                                //Change position
-                                Vector2 oldPosition = nodeSelected.GetComponent<Node>().GetPosition();
-                                int oldX = Mathf.RoundToInt(oldPosition.x);
-                                int oldY = Mathf.RoundToInt(oldPosition.y);
+                                if (dicNodesLvl[house].NodeCanMove())
+                                {
+                                    //Change position
+                                    Vector2 oldPosition = nodeSelected.GetComponent<Node>().GetPosition();
+                                    int oldX = Mathf.RoundToInt(oldPosition.x);
+                                    int oldY = Mathf.RoundToInt(oldPosition.y);
 
-                                //Selected Node
-                                Node aux = dicNodesLvl[house];
-                                dicNodesLvl[house] = nodeSelected.GetComponent<Node>();
-                                dicNodesLvl[house].SetPosition(gridX, gridY);
+                                    //Selected Node
+                                    Node aux = dicNodesLvl[house];
+                                    dicNodesLvl[house] = nodeSelected.GetComponent<Node>();
+                                    dicNodesLvl[house].SetPosition(gridX, gridY);
 
-                                //Old Node
-                                aux.SetPosition(oldX, oldY);
-                                dicNodesLvl[oldX + "_" + oldY] = aux;
+                                    //Old Node
+                                    aux.SetPosition(oldX, oldY);
+                                    dicNodesLvl[oldX + "_" + oldY] = aux;
 
-                                dicNodesLvl[oldX + "_" + oldY].transform.SetParent(goGameArea.transform);
-                                dicNodesLvl[house].transform.SetParent(goGameArea.transform);
-                                dicNodesLvl[oldX + "_" + oldY].MoveToInit();
-                                dicNodesLvl[house].MoveToInit();
+                                    dicNodesLvl[oldX + "_" + oldY].transform.SetParent(goGameArea.transform);
+                                    dicNodesLvl[house].transform.SetParent(goGameArea.transform);
+                                    dicNodesLvl[oldX + "_" + oldY].MoveToInit();
+                                    dicNodesLvl[house].MoveToInit();
 
-                                nodesMoved = 2; //How many node is moved
+                                    nodesMoved = 2; //How many node is moved
+                                }
+                                else
+                                {
+                                    nodeSelected.GetComponent<Node>().MoveToInit();
+                                }
+                                
+                            }
+                            else
+                            {
+                                nodeSelected.GetComponent<Node>().MoveToInit();
                             }
                         }
                         else
@@ -245,9 +257,14 @@ public class GameLogic : MonoBehaviour
                 menu.ShowWinMenu(lvlStar);
 
                 //Update PlayerLevel
-                if (currentLvl > PlayerPrefs.GetInt("userLevel", 0))
+                int nextLvl = currentLvl + 1;
+                if (nextLvl > PlayerPrefs.GetInt("userLevel", 0))
                 {
-                    PlayerPrefs.SetInt("userLevel", currentLvl);
+                    if (nextLvl > Global.MAX_LEVEL)
+                    {
+                        nextLvl = currentLvl;
+                    }
+                    PlayerPrefs.SetInt("userLevel", nextLvl);
                 }
             }
         }

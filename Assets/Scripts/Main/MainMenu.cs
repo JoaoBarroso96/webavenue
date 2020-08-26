@@ -12,8 +12,13 @@ public class MainMenu : MonoBehaviour
     {
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
+        int userLvl = PlayerPrefs.GetInt("userLevel", 0);
+        if (userLvl == 0)
+        {
+            PlayerPrefs.SetInt("userLevel", 1);
+        }
         //Remove
-        PlayerPrefs.SetInt("userLevel", 3);
+        PlayerPrefs.SetInt("userLevel", 1);
     }
 
     public void OnClickPlay()

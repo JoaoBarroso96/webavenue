@@ -6,5 +6,6 @@ using UnityEngine;
 public class Level : ScriptableObject
 {
     public float time;
+    public int scaleGrid;
     public List<NodeTemplate> nodes;
 }

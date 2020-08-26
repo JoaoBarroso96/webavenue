@@ -13,6 +13,7 @@ public class Menu : MonoBehaviour
     public float timeStars = 0.7f; // Time to show stars
     public List<Image> lstStars;
     public Sprite winStar;
+    public GameObject goTutorial;
     private SoundManager soundManager;
     private bool startTime;
     private bool isOpen; // menu is Open
@@ -28,6 +29,7 @@ public class Menu : MonoBehaviour
         lblLevel.text = "#" + currentLvl;
         isOpen = false;
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        goTutorial.SetActive(currentLvl == 1);
     }
 
     private void Update()
@@ -65,6 +67,18 @@ public class Menu : MonoBehaviour
 
     public void OnClickRestart()
     {
+        soundManager.PlayClip("tap");
+        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+    }
+
+    public void NextLevel()
+    {
+        currentLvl++;
+        if (currentLvl > Global.MAX_LEVEL)
+        {
+            currentLvl = Global.MAX_LEVEL;
+        }
+        PlayerPrefs.SetInt("currentLvl", currentLvl);
         soundManager.PlayClip("tap");
         SceneManager.LoadScene("Game", LoadSceneMode.Single);
     }
