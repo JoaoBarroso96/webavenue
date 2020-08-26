@@ -49,8 +49,7 @@ public class GameLogic : MonoBehaviour
         {
             timerLevel += Time.deltaTime;
 
-            //PC
-            if (isPC)
+            if (!menu.MenuIsOpen())
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -150,59 +149,7 @@ public class GameLogic : MonoBehaviour
                     canMoveNode = false;
                 }
             }
-
-            // Handle screen touches.
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                counterHold += Time.deltaTime;
-                print(counterHold);
-                if (touch.phase == TouchPhase.Began)
-                {
-                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit))
-                    {
-                        if (hit.collider.tag == "Node")
-                        {
-                            print("a");
-                        }
-                    }
-                }
-                // Move the cube if the screen has the finger moving.
-                if (touch.phase == TouchPhase.Moved)
-                {
-                    /*Vector2 pos = touch.position;
-                    pos.x = (pos.x - width) / width;
-                    pos.y = (pos.y - height) / height;
-                    position = new Vector3(-pos.x, pos.y, 0.0f);
-
-                    // Position the cube.
-                    transform.position = position;*/
-                }
-
-                /*if (Input.touchCount == 2)
-                {
-                    touch = Input.GetTouch(1);
-
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        // Halve the size of the cube.
-                        transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-                    }
-
-                    if (touch.phase == TouchPhase.Ended)
-                    {
-                        // Restore the regular size of the cube.
-                        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-                    }
-                }*/
-
-                if (touch.phase == TouchPhase.Ended)
-                {
-
-                }
-            }
+            
         }
     }
 
@@ -226,7 +173,6 @@ public class GameLogic : MonoBehaviour
             if (userWin) // User Won Level
             {
                 isFinished = true;
-                print("win");
 
                 //Calculate Pontuation
                 

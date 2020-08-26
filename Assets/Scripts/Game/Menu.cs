@@ -45,6 +45,11 @@ public class Menu : MonoBehaviour
         }
     }
 
+    public bool MenuIsOpen()
+    {
+        return isOpen;
+    }
+
     public void OnClickMenu()
     {
         if (canOpenMenu)

@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
             PlayerPrefs.SetInt("userLevel", 1);
         }
         //Remove
-        PlayerPrefs.SetInt("userLevel", 1);
+       //PlayerPrefs.SetInt("userLevel", 1);
     }
 
     public void OnClickPlay()

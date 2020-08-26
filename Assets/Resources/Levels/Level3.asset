@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b174b76f7cccad44c97827097382441b, type: 3}
   m_Name: Level3
   m_EditorClassIdentifier: 
-  time: 50
+  time: 70
   scaleGrid: 1
   nodes:
   - {fileID: 11400000, guid: 8632d12afcf237a4e9ebad1f5e1a93c1, type: 2}
